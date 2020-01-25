@@ -1,7 +1,7 @@
 # Bar Chart Race in MATLAB: getting started with `barh`
 
 
-Copyright 2020 Michio Inoue
+`Copyright (c) 2020 Michio Inoue`
 
 
 # Introduction

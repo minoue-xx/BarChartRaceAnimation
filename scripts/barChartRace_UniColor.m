@@ -1,5 +1,5 @@
 %% Bar Chart Rate Plot (One color version)
-% Copyright 2020 Michio Inoue
+% Copyright (c) 2020 Michio Inoue
 close all
 clear
 

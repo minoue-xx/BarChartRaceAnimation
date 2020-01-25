@@ -1,6 +1,5 @@
 # Bar Chart Race Plot
-
-Copyright 2020 michio
+Copyright (c) 2020 Michio Inoue
 
 
 This repository provides sample scripts which will generate a bar chart race plot. This can be a good example to work with Graphics Object of MATLAB.

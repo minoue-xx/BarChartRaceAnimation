@@ -1,5 +1,5 @@
 %% Bar Chart Rate Plot (Multi color version: multi bar objects)
-% Copyright 2020 Michio Inoue
+% Copyright (c) 2020 Michio Inoue
 close all
 clear
 
