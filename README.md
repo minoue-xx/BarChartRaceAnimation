@@ -2,7 +2,7 @@
 Copyright (c) 2020 Michio Inoue
 
 
-This repository provides sample scripts which will generate a bar chart race plot. This can be a good example to work with Graphics Object of MATLAB.
+This repository provides sample scripts (developed in R2019b) which will generate a bar chart race plot. This can be a good example to work with Graphics Object of MATLAB.
 
 - `barChatRace_UniColor.m`: Single color version
 - `barChatRace_multiColor_oneBar.m`: Multi-color version with one bar object.
