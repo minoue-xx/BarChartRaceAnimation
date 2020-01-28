@@ -16,7 +16,7 @@ This repository provides a function that generates a bar chart race plot.
 
 
   
-## **Syntax**
+# Syntax
 
 
 `barChartRace(X)` draws the animation of the bar chart for each rows of `X`. `X` can be numeric array, table, or timetable.
@@ -38,25 +38,25 @@ This repository provides a function that generates a bar chart race plot.
 
 
   
-## **Name-Value Pair Arguments**
+# Name-Value Pair Arguments
 
 
-**'Time': **A vector (numeric or datetime) that represents the time for each raw of X. The  default is 1:size(inputs,1)
-
-
-
-
-**'LabelNames': ** A cell or string vector of the variable names, each element corresponds to each columns of `X`. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable.
+**'Time':** A vector (numeric or datetime) that represents the time for each raw of `X`. The  default is `1:size(inputs,1)`
 
 
 
 
-**'ColorGroups':** A cell or string vector of color group name. Each element corresponds to each columns of X. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable. Example: With `'ColorGroups' = ['g1','g1','g2','g1','g2']`, the bars of 1st, 2nd, 4th column of inputs will the same color. The default color order will be used.
+**'LabelNames': **A cell or string vector of the variable names, each element corresponds to each columns of `X`. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable.
 
 
 
 
-**'NumInterp':** A number of datapoints to be generated between each time stamp of X. The larger the value is the smoother/slower the transtion. The default is 2.
+**'ColorGroups':** A cell or string vector of color group name. Each element corresponds to each columns of `X`. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable. Example: With `'ColorGroups' = ['g1','g1','g2','g1','g2']`, the bars of 1st, 2nd, 4th column of inputs will the same color. The default color order will be used.
+
+
+
+
+**'NumInterp':** A number of datapoints to be generated between each time stamp of `X`. The larger the value is the smoother/slower the transtion. The default is 2.
 
 
 
@@ -81,7 +81,7 @@ This repository provides a function that generates a bar chart race plot.
 
 
 
-**'IsInteger': **If TRUE, the text shown next to each bar will be arounded to interger value. The default is TRUE.
+**'IsInteger':** If TRUE, the text shown next to each bar will be arounded to interger value. The default is TRUE.
 
 
 
@@ -90,7 +90,7 @@ This repository provides a function that generates a bar chart race plot.
 
 
   
-# Example: 
+# Example
 
 
 See `barChartRace.m` for the detail options.
