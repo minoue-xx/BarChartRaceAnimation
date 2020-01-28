@@ -12,20 +12,23 @@ function [handle_barplot,handle_dataplot] = barChartRace(inputs,options)
 %   Use the following parameter name/value pairs to control the figure display.
 %
 %      'Time' A vector (numeric or datetime) that represents the time for each raw of X. The
-%             default is 1:size(inputs,1)
+%             default is 1:size(X,1)
 %
 %      'LabelNames' A cell or string vector of the variable names, each
 %                   element corresponds to each columns of X. The default is
-%                   "name" + string(1:size(inputs,2)) if X is a numeric array or the
+%                   "name" + string(1:size(X,2)) if X is a numeric array or the
 %                   name of varialbes if X is a table or timetable.
 %
 %      'ColorGroups' A cell or string vector of color group name. each
 %                   element corresponds to each columns of X. The default is
-%                   "name" + string(1:size(inputs,2)) if X is a numeric array or the
+%                   "name" + string(1:size(X,2)) if X is a numeric array or the
 %                   name of varialbes if X is a table or timetable.
 %                   Example: 'ColorGroups' = ['g1','g1','g2','g1','g2']
 %                   The bars of 1st, 2nd, 4th column of inputs will the same
 %                   color. The default color order will be used.
+%
+%      'NumDisplay' A number of variable to display from the top. The
+%                  default is all, size(X,2))
 %
 %      'NumInterp' A number of datapoints to be generated between each time
 %                  stamp of X. The larger the value is the smoother/slower the transtion.
@@ -71,6 +74,7 @@ arguments
     options.Time (:,1) {mustBeTimeInput(options.Time,inputs)} = setDefaultTime(inputs)
     options.LabelNames {mustBeVariableLabels(options.LabelNames,inputs)} = setDefaultLabels(inputs)
     options.ColorGroups {mustBeVariableLabels(options.ColorGroups,inputs)} = setDefaultLabels(inputs)
+    options.NumDisplay (1,1) double {mustBeInteger,mustBeNonzero} = size(setDefaultLabels(inputs));
     options.NumInterp (1,1) double {mustBeInteger,mustBeNonzero} = 2;
     options.Method char {mustBeMember(options.Method,{'linear','spline'})} = 'linear'
     options.GenerateGIF (1,1) {mustBeNumericOrLogical} = false
@@ -95,7 +99,7 @@ NumInterp = options.NumInterp;
 Method = options.Method;
 XlabelName = options.XlabelName;
 IsInteger = options.IsInteger;
-
+NumDisplay = options.NumDisplay;
 
 nVariables = length(LabelNames); % Number of items
 
@@ -132,7 +136,7 @@ handle_axes.XMinorGrid = 'on';
 handle_axes.FontSize = 15;
 handle_axes.YTickLabelRotation = 30;
 handle_axes.YAxis.Direction = 'reverse'; % rank 1 needs to be on the top
-handle_axes.YLim = [0, nVariables+1];
+handle_axes.YLim = [0, NumDisplay+0.5];
 
 defaultWidth = 0.8; % Default BarWidth
 
@@ -158,10 +162,19 @@ handle_axes.YTickLabel = LabelNames(idx);
 maxValue = max(value2plot);
 handle_axes.XLim = [0, maxValue*1.5];
 
+
 % Add value string next to the bar
 x = value2plot(idx) + maxValue*0.05;
 y = ytickpos;
-handle_text = text(x,y,string(value2plot),'FontSize',15);
+if IsInteger
+    displayText = string(round(value2plot(idx)));
+else
+    displayText = string(value2plot(idx));
+end
+x = x(1:NumDisplay);
+y = y(1:NumDisplay);
+displayText = displayText(1:NumDisplay);
+handle_text = text(x,y,displayText,'FontSize',15);
 
 % Display time
 handle_timeText = text(0.9,0.1,string(time2plot(1)),'HorizontalAlignment','right',...
@@ -219,7 +232,7 @@ for ii=2:length(ranking2plot)
     
     % Add value string next to the bar
     x = value2plot(idx) + maxValue*0.05;
-    for jj = 1:nVariables
+    for jj = 1:NumDisplay
         handle_text(jj).Position = [x(jj), ytickpos(jj)];
         if IsInteger
             handle_text(jj).String = string(round(x(jj))); % Modified

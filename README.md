@@ -56,6 +56,11 @@ This repository provides a function that generates a bar chart race plot.
 
 
 
+**'NumDisplay':** A number of variable to display from the top. The default is all, `size(X,2)`.
+
+
+
+
 **'NumInterp':** A number of datapoints to be generated between each time stamp of `X`. The larger the value is the smoother/slower the transtion. The default is 2.
 
 
