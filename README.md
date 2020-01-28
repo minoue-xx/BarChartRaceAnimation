@@ -46,7 +46,7 @@ This repository provides a function that generates a bar chart race plot.
 
 
 
-**'LabelNames': **A cell or string vector of the variable names, each element corresponds to each columns of `X`. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable.
+**'LabelNames':** A cell or string vector of the variable names, each element corresponds to each columns of `X`. The default is `"name" + string(1:size(X,2))` if `X` is a numeric array or the name of varialbes if `X` is a table or timetable.
 
 
 
