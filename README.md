@@ -91,6 +91,21 @@ This repository provides a function that generates a bar chart race plot.
 
 
 
+**'FontSize':** Axes fontsize, the default is 15.
+
+
+
+
+**'DisplayFontSize':** The fontsize of the time stamp display, the default is 15.
+
+
+
+
+**'YTickLabelRotation':** The angle of the y-axes label text, the default is 0.
+
+
+
+
 **'Position':** The positin of the figure (1x4). The deafult is 'DefaultFigurePosition'.
 
 

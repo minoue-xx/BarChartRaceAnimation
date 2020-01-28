@@ -47,6 +47,12 @@ function [handle_barplot,handle_dataplot] = barChartRace(inputs,options)
 %      'IsInteger' If TRUE, the text shown next to each bar will be arounded to interger value.
 %                  The default is TRUE.
 %
+%      'FontSize' Axes fontsize, the default is 15.
+%
+%      'DisplayFontSize' The fontsize of the time stamp display, the default is 15.
+%
+%      'YTickLabelRotation'  The angle of the y-axes label text, the default is 0.
+%
 %      'Position' The positin of the figure (1x4). The deafult is 'DefaultFigurePosition'
 %
 %
@@ -74,14 +80,17 @@ arguments
     options.Time (:,1) {mustBeTimeInput(options.Time,inputs)} = setDefaultTime(inputs)
     options.LabelNames {mustBeVariableLabels(options.LabelNames,inputs)} = setDefaultLabels(inputs)
     options.ColorGroups {mustBeVariableLabels(options.ColorGroups,inputs)} = setDefaultLabels(inputs)
-    options.NumDisplay (1,1) double {mustBeInteger,mustBeNonzero} = size(setDefaultLabels(inputs));
+    options.NumDisplay (1,1) double {mustBeInteger,mustBeNonzero} = length(setDefaultLabels(inputs));
     options.NumInterp (1,1) double {mustBeInteger,mustBeNonzero} = 2;
     options.Method char {mustBeMember(options.Method,{'linear','spline'})} = 'linear'
     options.GenerateGIF (1,1) {mustBeNumericOrLogical} = false
-    options.Outputfilename char {mustBeNonempty} = 'output'
+    options.Outputfilename char {mustBeNonempty} = 'output.gif'
     options.XlabelName char = ""
     options.IsInteger (1,1) {mustBeNumericOrLogical} = true
-    options.Position (1,4) {mustBeNumeric} = get(0, 'DefaultFigurePosition')
+    options.FontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
+    options.DisplayFontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
+    options.YTickLabelRotation (1,1) double {mustBeReal} = 0
+    options.Position (1,4) double {mustBeNumeric} = get(0, 'DefaultFigurePosition')
 end
 
 
@@ -174,12 +183,16 @@ end
 x = x(1:NumDisplay);
 y = y(1:NumDisplay);
 displayText = displayText(1:NumDisplay);
-handle_text = text(x,y,displayText,'FontSize',15);
+handle_text = text(x,y,displayText,'FontSize',options.FontSize);
 
 % Display time
 handle_timeText = text(0.9,0.1,string(time2plot(1)),'HorizontalAlignment','right',...
-    'Units','normalized','FontSize',15);
+    'Units','normalized','FontSize', options.DisplayFontSize);
 handle_axes.XLabel.String = XlabelName;
+
+% Display created by MATLAB message
+text(0.99,0.02,"Visualized by MATLAB",'HorizontalAlignment','right',...
+    'Units','normalized','FontSize', 10,'Color',[0.9,0.9,0.9]);
 
 % Change the Bar Color
 handle_bar.FaceColor = 'flat';
