@@ -178,20 +178,20 @@ handle_axes.YTickLabel = LabelNames(idx);
 maxValue = max(value2plot);
 handle_axes.XLim = [0, maxValue*1.5];
 
-
 % Add value string next to the bar
-x = value2plot(idx) + maxValue*0.05;
-y = ytickpos;
 if IsInteger
     displayText = string(round(value2plot(idx)));
 else
     displayText = string(value2plot(idx));
 end
+xTextPosition = value2plot(idx) + maxValue*0.05;
+yTextPosition = ytickpos;
 
-x = x(1:NumDisplay);
-y = y(1:NumDisplay);
+% NumDisplay values are used
+xTextPosition = xTextPosition(1:NumDisplay);
+yTextPosition = yTextPosition(1:NumDisplay);
 displayText = displayText(1:NumDisplay);
-handle_text = text(x,y,displayText,'FontSize',options.FontSize);
+handle_text = text(xTextPosition,yTextPosition,displayText,'FontSize',options.FontSize);
 
 % Display time
 handle_timeText = text(0.9,0.1,string(time2plot(1)),'HorizontalAlignment','right',...
@@ -252,15 +252,17 @@ for ii=2:length(ranking2plot)
     handle_axes.XLim = [0, maxValue*1.5];
     
     % Add value string next to the bar
-    x = value2plot(idx) + maxValue*0.05;
+    xTextPosition = value2plot(idx) + maxValue*0.05;
+    tmp = value2plot(idx); % data to display
     for jj = 1:NumDisplay
-        handle_text(jj).Position = [x(jj), ytickpos(jj)];
+        handle_text(jj).Position = [xTextPosition(jj), ytickpos(jj)];
         if IsInteger
-            handle_text(jj).String = string(round(x(jj))); % Modified
+            handle_text(jj).String = string(round(tmp(jj))); % Modified
         else
-            handle_text(jj).String = string(x(jj));
+            handle_text(jj).String = string(tmp(jj));
         end
     end
+    
     % Display the original time stamp (or index)
     handle_timeText.String = string(time(ceil(ii/NumInterp)));
     
