@@ -19,7 +19,7 @@ This repository provides a function that generates a bar chart race plot.
 # Syntax
 
 
-`barChartRace(X)` draws the animation of the bar chart for each rows of `X`. `X` can be numeric array, table, or timetable.
+`barChartRace(X)` draws the animation of the bar chart for each rows of `X`. `X` can be either a numeric array, table, or timetable.
 
 
 
@@ -41,7 +41,7 @@ This repository provides a function that generates a bar chart race plot.
 # Name-Value Pair Arguments
 
 
-**'Time':** A vector (numeric or datetime) that represents the time for each raw of `X`. The  default is `1:size(inputs,1)`
+**'Time':** A vector (numeric or datetime) that represents the time for each raw of `X`. The  default is `1:size(X,1)`
 
 
 
