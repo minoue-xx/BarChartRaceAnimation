@@ -11,15 +11,15 @@ function [handle_barplot,handle_dataplot] = barChartRace(inputs,options)
 %
 %   Use the following parameter name/value pairs to control the figure display.
 %
-%      'Time' A vector (numeric or datetime) that represents the time for each raw of X. The
+%      'Time' - A vector (numeric or datetime) that represents the time for each raw of X. The
 %             default is 1:size(X,1)
 %
-%      'LabelNames' A cell or string vector of the variable names, each
+%      'LabelNames' - A cell or string vector of the variable names, each
 %                   element corresponds to each columns of X. The default is
 %                   "name" + string(1:size(X,2)) if X is a numeric array or the
 %                   name of varialbes if X is a table or timetable.
 %
-%      'ColorGroups' A cell or string vector of color group name. each
+%      'ColorGroups' - A cell or string vector of color group name. each
 %                   element corresponds to each columns of X. The default is
 %                   "name" + string(1:size(X,2)) if X is a numeric array or the
 %                   name of varialbes if X is a table or timetable.
@@ -27,34 +27,39 @@ function [handle_barplot,handle_dataplot] = barChartRace(inputs,options)
 %                   The bars of 1st, 2nd, 4th column of inputs will the same
 %                   color. The default color order will be used.
 %
-%      'NumDisplay' A number of variable to display from the top. The
+%      'NumDisplay' - A number of variable to display from the top. The
 %                  default is all, size(X,2))
 %
-%      'NumInterp' A number of datapoints to be generated between each time
+%      'NumInterp' - A number of datapoints to be generated between each time
 %                  stamp of X. The larger the value is the smoother/slower the transtion.
 %                  The default is 2.
 %
-%      'Method' A method for above interpolation. The default is 'linear',
-%               but can be 'spline' for more dynamic bar transition.
+%      'Method' - A method for above interpolation. The default is 'linear',
+%                 but can be 'spline' for more dynamic bar transition.
 %
-%      'GenerateGIF' If TRUE GIF animation of bar chart race will be
-%                    generated.
+%      'GenerateGIF' - If TRUE GIF animation of bar chart race will be
+%                      generated.
 %
-%      'Outputfilename'  Output GIF file name
+%      'Outputfilename' - Output GIF file name
 %
-%      'XlabelName' The XLabelName, the defaultis "" (emtpy)
+%      'XlabelName' - The XLabelName, the defaultis "" (emtpy)
 %
-%      'IsInteger' If TRUE, the text shown next to each bar will be arounded to interger value.
-%                  The default is TRUE.
+%      'IsInteger' - If TRUE, the text shown next to each bar will be arounded to interger value.
+%                    The default is TRUE.
 %
-%      'FontSize' Axes fontsize, the default is 15.
+%      'FontSize' - Axes fontsize, the default is 15.
 %
-%      'DisplayFontSize' The fontsize of the time stamp display, the default is 15.
+%      'DisplayFontSize' - The fontsize of the time stamp display, the default is 15.
 %
-%      'YTickLabelRotation'  The angle of the y-axes label text, the default is 0.
+%      'YTickLabelRotation' - The angle of the y-axes label text, the default is 0.
 %
-%      'Position' The positin of the figure (1x4). The deafult is 'DefaultFigurePosition'
+%      'Position' - Location and size of the drawable area, specified as a vector of 
+%                   the form [left bottom width height]. The deafult is 'DefaultFigurePosition'
 %
+%      'GIFDelayTime' ? Delay before displaying next image. Delay before displaying next image, 
+%                       in seconds, a scalar value in the range [0,655].
+%                       Default is 0.05
+%                       (see imwrite)
 %
 %   Example:
 %
@@ -90,9 +95,9 @@ arguments
     options.FontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
     options.DisplayFontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
     options.YTickLabelRotation (1,1) double {mustBeReal} = 0
-    options.Position (1,4) double {mustBeNumeric} = get(0, 'DefaultFigurePosition')
+    options.Position (1,4) double {mustBeNumeric,mustBeNonzero} = get(0, 'DefaultFigurePosition')
+    options.GIFDelayTime (1,1) double {mustBeNumeric,mustBeNonzero} = 0.05
 end
-
 
 if isa(inputs,'timetable') || isa(inputs,'table')
     data = inputs.Variables;
@@ -125,13 +130,15 @@ ranking2plot = interp1(time,rankings,time2plot,Method);
 data2plot = interp1(time,data,time2plot,Method);
 
 %% Plot of variables and the transition of their rankings
-handle_dataplot = figure;
-subplot(2,1,1)
-plot(time,data,'LineWidth',2)
-legend(LabelNames)
-subplot(2,1,2)
-plot(time2plot,ranking2plot,'LineWidth',2)
-legend(LabelNames)
+if nargout == 2
+    handle_dataplot = figure;
+    subplot(2,1,1)
+    plot(time,data,'LineWidth',2)
+    legend(LabelNames)
+    subplot(2,1,2)
+    plot(time2plot,ranking2plot,'LineWidth',2)
+    legend(LabelNames)
+end
 
 %% Let's create Bar Chart
 handle_barplot = figure;
@@ -142,8 +149,8 @@ handle_axes.XGrid = 'on';
 handle_axes.XMinorGrid = 'on';
 
 % Some visual settings
-handle_axes.FontSize = 15;
-handle_axes.YTickLabelRotation = 30;
+handle_axes.FontSize = options.FontSize;
+handle_axes.YTickLabelRotation = options.YTickLabelRotation;
 handle_axes.YAxis.Direction = 'reverse'; % rank 1 needs to be on the top
 handle_axes.YLim = [0, NumDisplay+0.5];
 
@@ -180,6 +187,7 @@ if IsInteger
 else
     displayText = string(value2plot(idx));
 end
+
 x = x(1:NumDisplay);
 y = y(1:NumDisplay);
 displayText = displayText(1:NumDisplay);
@@ -192,7 +200,7 @@ handle_axes.XLabel.String = XlabelName;
 
 % Display created by MATLAB message
 text(0.99,0.02,"Visualized by MATLAB",'HorizontalAlignment','right',...
-    'Units','normalized','FontSize', 10,'Color',[0.9,0.9,0.9]);
+    'Units','normalized','FontSize', 10,'Color',0.5*[1,1,1]);
 
 % Change the Bar Color
 handle_bar.FaceColor = 'flat';
@@ -261,9 +269,9 @@ for ii=2:length(ranking2plot)
         tmp = frame2im(frame); % 画像に変更
         [A,map] = rgb2ind(tmp,256); % RGB -> インデックス画像に
         if ii == 2 % 新規 gif ファイル作成
-            imwrite(A,map,Outputfilename,'gif','LoopCount',Inf,'DelayTime',0.05);
+            imwrite(A,map,Outputfilename,'gif','LoopCount',Inf,'DelayTime',options.GIFDelayTime);
         else % 以降、画像をアペンド
-            imwrite(A,map,Outputfilename,'gif','WriteMode','append','DelayTime',0.05);
+            imwrite(A,map,Outputfilename,'gif','WriteMode','append','DelayTime',options.GIFDelayTime);
         end
     end
     
