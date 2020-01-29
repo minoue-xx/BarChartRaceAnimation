@@ -92,11 +92,11 @@ arguments
     options.Outputfilename char {mustBeNonempty} = 'output.gif'
     options.XlabelName char = ""
     options.IsInteger (1,1) {mustBeNumericOrLogical} = true
-    options.FontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
-    options.DisplayFontSize (1,1) double {mustBeInteger,mustBeNonzero} = 15
-    options.YTickLabelRotation (1,1) double {mustBeReal} = 0
-    options.Position (1,4) double {mustBeNumeric,mustBeNonzero} = get(0, 'DefaultFigurePosition')
-    options.GIFDelayTime (1,1) double {mustBeNumeric,mustBeNonzero} = 0.05
+    options.FontSize (1,1) double {mustBeInteger,mustBeNonzero,mustBeNonNan} = 15
+    options.DisplayFontSize (1,1) {mustBeInteger,mustBeNonzero} = 15
+    options.YTickLabelRotation (1,1) {mustBeNumericOrLogical} = 0
+    options.Position (1,4) {mustBeNumeric,mustBeNonzero} = get(0, 'DefaultFigurePosition')
+    options.GIFDelayTime (1,1) {mustBeNumeric,mustBeNonzero} = 0.05
 end
 
 if isa(inputs,'timetable') || isa(inputs,'table')
