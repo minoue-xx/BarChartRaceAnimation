@@ -51,7 +51,12 @@ R2019b で作りましたが、下で解説する Arguments に関わる部分を取り除けば R2017b で
 
 
 
-「現在のフォルダ」に表示される `05k5-5.xlsx` をダブルクリックして、読み込み範囲を指定して「スクリプトの生成」をクリック。そのスクリプトを実行すると変数 `k55` として読み込まれるはず。（importData.m は[こちら](https://github.com/minoue-xx/BarChartRaceAnimation/tree/master/example/RegionalPopulationJapan)にもおいています。）
+「現在のフォルダ」に表示される `05k5-5.xlsx` をダブルクリックして、読み込み範囲を指定して「スクリプトの生成」をクリック。出力タイプは cell 配列で。
+
+
+
+
+そのスクリプトを実行すると変数 `k55` として読み込まれるはず。（importData.m は[こちら](https://github.com/minoue-xx/BarChartRaceAnimation/tree/master/example/RegionalPopulationJapan)にもおいています。）
 
 
 ```matlab
