@@ -114,6 +114,11 @@ This repository provides a function that generates a bar chart race plot.
 **'GIFDelayTime':** Delay before displaying next image. Delay before displaying next image, in seconds, a scalar value in the range [0,655]. The default here is 0.05 (see imwrite for details)
 
 
+
+
+**'Footnote':** String text to display at the bottom right corner of the axes. For multiple lines of text, use a vector of strings. Default is "visualized by MATLAB"
+
+
   
 # Example
 

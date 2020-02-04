@@ -56,10 +56,13 @@ function [handle_barplot,handle_dataplot] = barChartRace(inputs,options)
 %      'Position' - Location and size of the drawable area, specified as a vector of 
 %                   the form [left bottom width height]. The deafult is 'DefaultFigurePosition'
 %
-%      'GIFDelayTime' ? Delay before displaying next image. Delay before displaying next image, 
+%      'GIFDelayTime' - Delay before displaying next image. Delay before displaying next image, 
 %                       in seconds, a scalar value in the range [0,655].
-%                       Default is 0.05
-%                       (see imwrite)
+%                       Default is 0.05 (see imwrite)
+%
+%      'Footnote' - String text to display at the bottom right corner of the axes.
+%                   For multiple lines of text, use a vector of strings.
+%                   Default is "visualized by MATLAB"
 %
 %   Example:
 %
@@ -97,6 +100,7 @@ arguments
     options.YTickLabelRotation (1,1) {mustBeNumericOrLogical} = 0
     options.Position (1,4) {mustBeNumeric,mustBeNonzero} = get(0, 'DefaultFigurePosition')
     options.GIFDelayTime (1,1) {mustBeNumeric,mustBeNonzero} = 0.05
+    options.Footnote char = "Visualized by MATLAB"
 end
 
 if isa(inputs,'timetable') || isa(inputs,'table')
@@ -199,7 +203,8 @@ handle_timeText = text(0.9,0.1,string(time2plot(1)),'HorizontalAlignment','right
 handle_axes.XLabel.String = XlabelName;
 
 % Display created by MATLAB message
-text(0.99,0.02,"Visualized by MATLAB",'HorizontalAlignment','right',...
+nlines = length(string(options.Footnote));
+text(0.99,0.02*nlines,string(options.Footnote),'HorizontalAlignment','right',...
     'Units','normalized','FontSize', 10,'Color',0.5*[1,1,1]);
 
 % Change the Bar Color
