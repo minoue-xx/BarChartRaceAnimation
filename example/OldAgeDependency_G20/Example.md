@@ -25,7 +25,12 @@ addpath("../../function")
 # データ読み込み
 
 
-ザクっとインポートツールから読み込むスクリプトを作りました。変数 data として読み込まれるはず。
+ザクっとインポートツールから読み込むスクリプトを作りました。変数 data として読み込まれるはず。出力タイプは cell 配列。
+
+
+
+
+![image_1.png](Example_images/image_1.png)
 
 
 ```matlab
@@ -101,9 +106,10 @@ colorGroup(isJapan) = "Japan";
 barChartRace(T,'IsInteger',false,'NumInterp',10,...
     'ColorGroups',colorGroup,...
     'XlabelName',"65歳以上の人口/15-64歳の人口 x 100",...
-    'Position',  [400  180  600  700],...
+    'Position',  [400  180  500  600],...
     'YTickLabelRotation',30,...
-    'DisplayFontSize',30,'GenerateGIF',false,...
+    'FontSize',10,...
+    'DisplayFontSize',20,'GenerateGIF',true,...
     'Footnote',["Visualized by MATLAB","UN World Population Prospects 2019 から"])
 ```
 
@@ -113,10 +119,10 @@ barChartRace(T,'IsInteger',false,'NumInterp',10,...
 ans = 
   Figure (LiveEditorRunTimeFigure) のプロパティ:
 
-      Number: 15
+      Number: 1
         Name: ''
        Color: [1 1 1]
-    Position: [400 180 600 700]
+    Position: [400 180 500 600]
        Units: 'pixels'
 
   すべてのプロパティ を表示
