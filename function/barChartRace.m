@@ -119,7 +119,7 @@ nVariables = length(LabelNames); % Number of items
 
 %% Ranking of each variable (names) at each time step
 rankings = zeros(size(data));
-for ii=1:length(data)
+for ii=1:size(data,1)
     [~,tmp] = sort(data(ii,:),'descend');
     rankings(ii,tmp) = 1:nVariables;
 end
@@ -225,7 +225,7 @@ for ii=2:length(ranking2plot)
     
     % barh gives an error if ranking has duplicate values
     % Thus skip it.
-    if length(unique(ytickpos)) < nVariables
+    if length(unique(ranking)) < nVariables
         continue;
     end
     
