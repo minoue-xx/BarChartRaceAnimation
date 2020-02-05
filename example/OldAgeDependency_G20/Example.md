@@ -11,12 +11,12 @@ Copyright (c) 2020 Michio Inoue
 
 
 
-まず[国連：World Population Prospects 2019](https://population.un.org/wpp/Download/Standard/Population/)のページからデータをダウンロードします。
+まず[国連：World Population Prospects 2019](https://population.un.org/wpp/Download/Standard/Population/)のページからデータ（Old-Age Dependency Ratio 1）をダウンロードします。
 
 
 
 
-`WPP2019_POP_F13_A_OLD_AGE_DEPENDENCY_RATIO_1564.xlsx` というファイルが本スクリプトと同じフォルダにダウンロードされたと仮定します。
+そして `WPP2019_POP_F13_A_OLD_AGE_DEPENDENCY_RATIO_1564.xlsx` というファイルが本スクリプトと同じフォルダにダウンロードされたと仮定します。
 
 
 ```matlab
