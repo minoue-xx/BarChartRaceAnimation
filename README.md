@@ -1,5 +1,7 @@
 # Bar Chart Race Plot
 
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=minoue-xx/BarChartRaceAnimation)
+
 [![View BarChartRaceAnimation on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://jp.mathworks.com/matlabcentral/fileexchange/75167-barchartraceanimation)
 
 Copyright (c) 2020 Michio Inoue
