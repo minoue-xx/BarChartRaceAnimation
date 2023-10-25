@@ -135,7 +135,7 @@ Here's a toy data set and its transition of rankings. The variable A starts from
 
 
 ```matlab
-addpath(".\function");
+addpath("function");
 
 % Some toy (time series) data set
 maxT = 45;
